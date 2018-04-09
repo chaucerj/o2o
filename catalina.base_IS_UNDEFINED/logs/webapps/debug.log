@@ -1,0 +1,8 @@
+2018-04-03 17:41:50.839 [main] DEBUG com.chaucer.o2o.dao.ShopDao.insertShop - ==>  Preparing: INSERT INTO tb_shop(owner_id, area_id, category_id, shop_name, shop_description, shop_address, shop_contact, shop_img, priority, create_time, last_edit_time, enable_status, advice) VALUES (?,?,?,?, ?,?,?,?,?, ?,?, ?,?) 
+2018-04-03 17:41:50.877 [main] DEBUG com.chaucer.o2o.dao.ShopDao.insertShop - ==> Parameters: 1(Long), 2(Long), 1(Long), 测试3(String), test(String), road(String), 112(String), null, null, 2018-04-03 17:41:50.817(Timestamp), 2018-04-03 17:41:50.817(Timestamp), 0(Integer), 审核中(String)
+2018-04-03 17:41:50.975 [main] DEBUG com.chaucer.o2o.dao.ShopDao.insertShop - <==    Updates: 1
+2018-04-03 17:41:50.984 [main] DEBUG com.chaucer.o2o.util.ImageUtil - current img path is\upload\images\item\shop\16\2018040317415059089.jpg
+2018-04-03 17:41:50.985 [main] DEBUG com.chaucer.o2o.util.ImageUtil - current complete img path isE:\project\image\upload\images\item\shop\16\2018040317415059089.jpg
+2018-04-03 17:41:51.289 [main] DEBUG com.chaucer.o2o.dao.ShopDao.updateShop - ==>  Preparing: update tb_shop SET shop_name=?, shop_description=?, shop_address=?, shop_contact=?, shop_img=?, last_edit_time=?, enable_status=?, advice=?, area_id=?, category_id=? where shop_id=? 
+2018-04-03 17:41:51.290 [main] DEBUG com.chaucer.o2o.dao.ShopDao.updateShop - ==> Parameters: 测试3(String), test(String), road(String), 112(String), \upload\images\item\shop\16\2018040317415059089.jpg(String), 2018-04-03 17:41:50.817(Timestamp), 0(Integer), 审核中(String), 2(Long), 1(Long), 16(Long)
+2018-04-03 17:41:51.291 [main] DEBUG com.chaucer.o2o.dao.ShopDao.updateShop - <==    Updates: 1
