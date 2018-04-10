@@ -15,13 +15,22 @@ import com.chaucer.o2o.entity.Shop;
 import com.chaucer.o2o.entity.ShopCategory;
 import com.chaucer.o2o.entity.UserInfo;
 
-public class ShopDaoTest extends BaseTest{
+public class ShopDaoTest extends BaseTest {
 	@Autowired
 	private ShopDao shopDao;
-    @Test
-    @Ignore
-	public void testinsertShop(){
-    	Shop shop = new Shop();
+
+	@Test
+	public void testQueryByShopId() {
+		long shopId = 1L;
+		Shop shop = shopDao.queryShopById(shopId);
+		System.out.println(shop.getArea().getAreaId());
+		System.out.println(shop.getArea().getAreaName());
+	}
+
+	@Test
+	@Ignore
+	public void testinsertShop() {
+		Shop shop = new Shop();
 		ShopCategory sc = new ShopCategory();
 		UserInfo owner = new UserInfo();
 		Area area = new Area();
@@ -40,16 +49,18 @@ public class ShopDaoTest extends BaseTest{
 		shop.setEnableStatus(1);
 		shop.setShopDescription("test");
 		int effectNum = shopDao.insertShop(shop);
-		assertEquals(1,effectNum);
+		assertEquals(1, effectNum);
 	}
-    @Test
-    public void testupdateShop(){
-    	Shop shop = new Shop();
-    	shop.setShopId(1L);
-    	shop.setLastEditTime(new Date());
-    	shop.setShopDescription("测试描述");
-    	shop.setShopImg("测试图片");
-    	int effectNum = shopDao.updateShop(shop);
-    	assertEquals(1,effectNum);
-    }
+
+	@Test
+	@Ignore
+	public void testupdateShop() {
+		Shop shop = new Shop();
+		shop.setShopId(1L);
+		shop.setLastEditTime(new Date());
+		shop.setShopDescription("测试描述");
+		shop.setShopImg("测试图片");
+		int effectNum = shopDao.updateShop(shop);
+		assertEquals(1, effectNum);
+	}
 }

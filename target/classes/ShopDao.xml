@@ -32,9 +32,9 @@
 		SELECT
 		s.shop_id,
 		s.shop_name,
-		s.shop_desc,
-		s.shop_addr,
-		s.phone,
+		s.shop_description,
+		s.shop_address,
+		s.shop_contact,
 		s.shop_img,
 		s.priority,
 		s.create_time,
