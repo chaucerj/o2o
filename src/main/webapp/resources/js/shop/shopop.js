@@ -7,7 +7,7 @@ $(function() {
 	var initUrl = "o2o/shopadmin/getshopinitInfo";
 	var registerShopUrl = "o2o/shopadmin/register";
 	var shopInfoUrl = "/o2o/shopadmin/getshopbyid?shopId=" + shopId;
-	var editShopUrl = "o2o/shop/modifyshop";
+	var editShopUrl = "o2o/shopadmin/modifyshop";
 	if (!isEdit) {
 		getShopInitInfo();
 	} else {
@@ -63,6 +63,9 @@ $(function() {
 	}
 	$("#submit").click(function() {
 		var shop = {};
+		if(isEdit){
+			shop.shopId=shopId;
+		}
 		shop.shopName = $("#shop-name").val();
 		shop.shopPhone = $("#shop-phone").val();
 		shop.shopAddr = $("#shop-addr").val();
