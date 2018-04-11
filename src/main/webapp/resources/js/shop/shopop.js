@@ -15,7 +15,7 @@ $(function(){
 					tempHtml+='<option data-id="'+item.shopCategoryId+'">'
 				+item.shopCategoryName+'</option>';
 				});
-				date.areaList.map(function(item,index){
+				data.areaList.map(function(item,index){
 					tempAreaHtml='<option data-id="'+item.areaId+'">'
 				+item.areaName+'</option>';
 				});
@@ -27,8 +27,8 @@ $(function(){
 			var shop={};
 			shop.shopName = $("#shop-name").val();
 			shop.shopPhone = $("#shop-phone").val();
-			shop.shopAddr = $("shop-addr").val();
-			shop.shopDesc = $("shop-desc").val();
+			shop.shopAddr = $("#shop-addr").val();
+			shop.shopDesc = $("#shop-desc").val();
 			shop.shopCategory={
 				shopCategoryId:$("#shop-category").find("option").not(function(){
 					return !this.selected;
@@ -40,9 +40,16 @@ $(function(){
 					}).data("id")
 			};
 			var shopImg = ("#shop-img")[0].files[0];
+			
 			var formData = new FormData();
 			formData.append('shopImg',shopImg);
 			formData.append('shopStr',JSON.Stringify(shop));
+			var verifyCodeActural = ('#j_kaptcha').val();
+			if(!verifyCodeActural){
+				$.toast("请输入验证码");
+				return
+			}
+			formData.append("verifyCodeActural",verifyCodeActural);
 			$.ajax({
 				url:registerShopUrl,
 				type:'POST',
@@ -56,6 +63,7 @@ $(function(){
 					}else{
 						$.toast("提交失败！"+data.errMsg);
 					}
+					$('#kaptcha_img').click();
 				}
 			});
 		});

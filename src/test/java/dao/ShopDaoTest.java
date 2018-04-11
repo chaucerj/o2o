@@ -20,6 +20,7 @@ public class ShopDaoTest extends BaseTest {
 	private ShopDao shopDao;
 
 	@Test
+	
 	public void testQueryByShopId() {
 		long shopId = 1L;
 		Shop shop = shopDao.queryShopById(shopId);

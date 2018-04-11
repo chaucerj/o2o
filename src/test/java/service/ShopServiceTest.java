@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,15 +19,27 @@ import com.chaucer.o2o.entity.Shop;
 import com.chaucer.o2o.entity.ShopCategory;
 import com.chaucer.o2o.entity.UserInfo;
 import com.chaucer.o2o.enums.ShopStatusEnum;
+import com.chaucer.o2o.exceptions.ShopOperationException;
 import com.chaucer.o2o.service.ShopService;
 
 public class ShopServiceTest extends BaseTest {
 	@Autowired
+	
 	private ShopService shopService;
-    @Test
-  
-	public void testAddShop() throws FileNotFoundException{
-    	Shop shop = new Shop();
+	@Test
+	public void testModifyShop() throws ShopOperationException,FileNotFoundException{
+		Shop shop = new Shop();
+		shop.setShopId(1L);
+		shop.setShopName("修改后的名称");
+		File shopImg = new File("E:/project/image/itachi.jpg");
+		InputStream ips = new FileInputStream(shopImg);
+		ShopExecution se = shopService.modifyShop(shop, ips, shopImg.getName());
+		System.out.println(shop.getShopImg());
+	}
+	@Test
+	@Ignore
+	public void testAddShop() throws ShopOperationException, FileNotFoundException {
+		Shop shop = new Shop();
 		ShopCategory sc = new ShopCategory();
 		UserInfo owner = new UserInfo();
 		Area area = new Area();
@@ -45,8 +58,8 @@ public class ShopServiceTest extends BaseTest {
 		shop.setShopDescription("test");
 		File shopImg = new File("E:/project/image/test.jpg");
 		InputStream ips = new FileInputStream(shopImg);
-		ShopExecution se = shopService.addShop(shop, ips,shopImg.getName());
-		assertEquals(ShopStatusEnum.CHECK.getStatus(),se.getStatus());
-	
+		ShopExecution se = shopService.addShop(shop, ips, shopImg.getName());
+		assertEquals(ShopStatusEnum.CHECK.getStatus(), se.getStatus());
+
 	}
 }
