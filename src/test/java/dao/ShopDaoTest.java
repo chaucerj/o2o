@@ -3,6 +3,7 @@ package dao;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -20,7 +21,24 @@ public class ShopDaoTest extends BaseTest {
 	private ShopDao shopDao;
 
 	@Test
-	
+	public void testQueryShopList() {
+		Shop shopCondition = new Shop();
+		UserInfo owner = new UserInfo();
+		shopCondition.setOwner(owner);
+		List<Shop> shopList = shopDao.queryShopList(shopCondition, 1, 5);
+		int count = shopDao.queryShopCount(shopCondition);
+		System.out.println(shopList.size());
+		ShopCategory sc = new ShopCategory();
+		sc.setCategoryId(3L);
+		shopCondition.setShopCategory(sc);
+		shopList = shopDao.queryShopList(shopCondition, 0, 2);
+		System.out.println(shopList.size());
+		count = shopDao.queryShopCount(shopCondition);
+		System.out.println(count);
+	}
+
+	@Test
+	@Ignore
 	public void testQueryByShopId() {
 		long shopId = 1L;
 		Shop shop = shopDao.queryShopById(shopId);

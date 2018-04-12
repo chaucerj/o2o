@@ -2,6 +2,7 @@ package com.chaucer.o2o.service.impl;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,28 @@ import com.chaucer.o2o.enums.ShopStatusEnum;
 import com.chaucer.o2o.exceptions.ShopOperationException;
 import com.chaucer.o2o.service.ShopService;
 import com.chaucer.o2o.util.ImageUtil;
+import com.chaucer.o2o.util.PageCalculator;
 import com.chaucer.o2o.util.PathUtil;
 
 @Service
 public class ShopServiceImpl implements ShopService {
 	@Autowired
 	private ShopDao shopDao;
+
+	@Override
+	public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize) throws ShopOperationException {
+		int rowIndex = PageCalculator.calculate(pageIndex, pageSize);
+		List<Shop> shopList = shopDao.queryShopList(shopCondition, rowIndex, pageSize);
+		int amount = shopDao.queryShopCount(shopCondition);
+		ShopExecution se = new ShopExecution();
+		if(shopList!=null){
+			se.setShopList(shopList);
+			se.setAmount(amount);
+		}else{
+			se.setStatus(ShopStatusEnum.NULL_SHOP.getStatus());
+		}
+		return se;
+	}
 
 	@Override
 	public Shop getShopById(long shopId) {

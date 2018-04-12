@@ -27,4 +27,13 @@ public interface ShopService {
 	 * @throws ShopOperationException
 	 */
 	ShopExecution addShop(Shop shop,InputStream ips,String filename) throws ShopOperationException;
+	/**
+	 * 分页查询店铺信息
+	 * @param shopCondition
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 * @throws ShopOperationException
+	 */
+	ShopExecution getShopList(Shop shopCondition,int pageIndex,int pageSize) throws ShopOperationException;
 }

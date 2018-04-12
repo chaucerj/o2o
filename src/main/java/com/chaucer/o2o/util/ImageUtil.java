@@ -76,6 +76,23 @@ public class ImageUtil {
 			dirPath.mkdirs();
 		}
 	}
+	/**
+	 * 
+	 * @param storePath 文件路径还是目录路径
+	 */
+	public static void deleteFileOrPath(String storePath){
+		File FileOrPath = new File(PathUtil.getImgBasePath()+storePath);
+		if(FileOrPath.exists()){
+			if(FileOrPath.isDirectory()){
+				File files[] = FileOrPath.listFiles();
+				for(int i=0;i<files.length;i++){
+					files[i].delete();
+				}
+			}
+			FileOrPath.delete();
+		}
+		
+	}
     public static void main(String[] args) throws IOException {
 	Thumbnails.of(new File("E:/project/image/test.jpg")).size(200, 200).
 	watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath+"watermark.jpg")),0.25f ).

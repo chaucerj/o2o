@@ -24,9 +24,19 @@ import com.chaucer.o2o.service.ShopService;
 
 public class ShopServiceTest extends BaseTest {
 	@Autowired
-	
 	private ShopService shopService;
 	@Test
+	public void testGetShopList()throws ShopOperationException{
+		Shop shopCondition = new Shop();
+		ShopCategory shopCategory = new ShopCategory();
+		shopCategory.setCategoryId(3L);
+		shopCondition.setShopCategory(shopCategory);
+		ShopExecution se = shopService.getShopList(shopCondition, 1, 2);
+		System.out.println(se.getShopList().size());
+		System.out.println(se.getAmount());
+	}
+	@Test
+	@Ignore
 	public void testModifyShop() throws ShopOperationException,FileNotFoundException{
 		Shop shop = new Shop();
 		shop.setShopId(1L);

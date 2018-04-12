@@ -10,7 +10,7 @@ public class ShopExecution {
 	private int status;
 	private String statusInfo;
 	private Shop shop;
-	private String amount;
+	private int amount;
 	private List<Shop> shopList;
 	public ShopExecution(){
 		
@@ -49,10 +49,11 @@ public class ShopExecution {
 	public void setShop(Shop shop) {
 		this.shop = shop;
 	}
-	public String getAmount() {
+	
+	public int getAmount() {
 		return amount;
 	}
-	public void setAmount(String amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	public List<Shop> getShopList() {

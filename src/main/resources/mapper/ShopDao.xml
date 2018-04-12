@@ -3,9 +3,9 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chaucer.o2o.dao.ShopDao">
- <resultMap type="com.chaucer.o2o.entity.Shop" id="shopMap">
-   <id column="shop_id" property="shopId"/>
-   <result column="shop_name" property="shopName" />
+	<resultMap type="com.chaucer.o2o.entity.Shop" id="shopMap">
+		<id column="shop_id" property="shopId" />
+		<result column="shop_name" property="shopName" />
 		<result column="shop_description" property="shopDescription" />
 		<result column="shop_address" property="shopAddress" />
 		<result column="sho_contact" property="shopContact" />
@@ -15,20 +15,72 @@
 		<result column="last_edit_time" property="lastEditTime" />
 		<result column="enable_status" property="enableStatus" />
 		<result column="advice" property="advice" />
-        <association property="area" column="area_id" javaType="com.chaucer.o2o.entity.Area">
-          <id column="area_id" property="areaId"/>
-          <result column="area_name" property="areaName"/>
-        </association>
-         <association property="shopCategory" column="category_id" javaType="com.chaucer.o2o.entity.ShopCategory">
-          <id column="category_id" property="categoryId"/>
-          <result column="category_name" property="categoryName"/>
-        </association>
-         <association property="owner" column="user_id" javaType="com.chaucer.o2o.entity.UserInfo">
-          <id column="user_id" property="userId"/>
-          <result column="name" property="name"/>
-        </association>
- </resultMap>
- <select id="queryShopById" resultMap="shopMap" parameterType="Long">
+		<association property="area" column="area_id"
+			javaType="com.chaucer.o2o.entity.Area">
+			<id column="area_id" property="areaId" />
+			<result column="area_name" property="areaName" />
+		</association>
+		<association property="shopCategory" column="category_id"
+			javaType="com.chaucer.o2o.entity.ShopCategory">
+			<id column="category_id" property="categoryId" />
+			<result column="category_name" property="categoryName" />
+		</association>
+		<association property="owner" column="user_id"
+			javaType="com.chaucer.o2o.entity.UserInfo">
+			<id column="user_id" property="userId" />
+			<result column="name" property="name" />
+		</association>
+	</resultMap>
+	<select id="queryShopList" resultMap="shopMap" parameterType="Long">
+		SELECT
+		s.shop_id,
+		s.shop_name,
+		s.shop_description,
+		s.shop_address,
+		s.shop_contact,
+		s.shop_img,
+		s.priority,
+		s.create_time,
+		s.last_edit_time,
+		s.enable_status,
+		s.advice,
+		a.area_id,
+		a.area_name,
+		sc.category_id,
+		sc.category_name
+		FROM
+		tb_shop s,
+		tb_area a,
+		tb_shop_category sc
+		<where>
+			<if
+				test="shopCondition.shopCategory!=null and shopCondition.ShopCategory.categoryId!=null">
+				and s.category_id =#{shopCondition.shopCategory.categoryId}
+			</if>
+			<if
+				test="shopCondition.area != null and 
+			shopCondition.area.areaId != null">
+				and s.area_id =
+				#{shopCondition.area.areaId}
+			</if>
+			<if test="shopCondition.shopName != null">
+				and s.shop_name like '%${shopCondition.shopName}%'
+			</if>
+			<if test="shopCondition.enableStatus != null">
+				and s.enable_status = #{shopCondition.enableStatus}
+			</if>
+			<if
+				test="shopCondition.owner != null and shopCondition.owner.userId != null">
+				and s.owner_id = #{shopCondition.owner.userId}
+			</if>
+			AND s.area_id=a.area_id
+			AND s.category_id=sc.category_id
+		</where>
+		ORDER BY
+		s.priority DESC
+		LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<select id="queryShopById" resultMap="shopMap" parameterType="Long">
 		SELECT
 		s.shop_id,
 		s.shop_name,
@@ -54,38 +106,47 @@
 		AND
 		s.category_id = sc.category_id
 		AND
-		s.shop_id = #{shopId}
+		s.shop_id =
+		#{shopId}
 	</select>
- <select id="queryShopList" resultMap="shopMap">
-		SELECT
-		s.shop_id,
-		s.shop_name,
-		s.shop_description,
-		s.shop_address,
-		s.shop_contact,
-		s.shop_img,
-		s.priority,
-		s.create_time,
-		s.last_edit_time,
-		s.enable_status,
-		s.advice,
-		a.area_id,
-		a.area_name,
-		sc.category_id,
-		sc.shop_category_name
+	<select id="queryShopCount" resultType="int">
+		SELECT count(1)
 		FROM
 		tb_shop s,
 		tb_area a,
 		tb_shop_category sc
-		WHERE s.area_id=a.area_id,
-		AND sc.shop_category_id=s.shop_category_id,
-		AND s.shop_id=#{shopId}
+		<where>
+			<if
+				test="shopCondition.shopCategory!=null and shopCondition.ShopCategory.categoryId!=null">
+				and s.category_id =#{shopCondition.shopCategory.categoryId}
+			</if>
+			<if
+				test="shopCondition.area != null and 
+			shopCondition.area.areaId != null">
+				and s.area_id =
+				#{shopCondition.area.areaId}
+			</if>
+			<if test="shopCondition.shopName != null">
+				and s.shop_name like '%${shopCondition.shopName}%'
+			</if>
+			<if test="shopCondition.enableStatus != null">
+				and s.enable_status = #{shopCondition.enableStatus}
+			</if>
+			<if
+				test="shopCondition.owner != null and shopCondition.owner.userId != null">
+				and s.owner_id = #{shopCondition.owner.userId}
+			</if>
+			AND a.area_id=s.area_id
+			AND s.category_id=sc.category_id
+		</where>
 	</select>
-	<insert id= "insertShop" useGeneratedKeys="true" keyColumn="shop_id" keyProperty="shopId">
+	<insert id="insertShop" useGeneratedKeys="true" keyColumn="shop_id"
+		keyProperty="shopId">
 		INSERT INTO
 		tb_shop(owner_id, area_id, category_id,
 		shop_name, shop_description, shop_address,
-		shop_contact, shop_img, priority,
+		shop_contact, shop_img,
+		priority,
 		create_time, last_edit_time, enable_status,
 		advice)
 		VALUES
