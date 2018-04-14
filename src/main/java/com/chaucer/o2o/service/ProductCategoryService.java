@@ -8,6 +8,7 @@ import com.chaucer.o2o.entity.ProductCategory;
 
 @Service
 public interface ProductCategoryService {
-	public List<ProductCategory> getProductCategoryList();
+
+	List<ProductCategory> getProductCategoryList(long shopId);
 
 }

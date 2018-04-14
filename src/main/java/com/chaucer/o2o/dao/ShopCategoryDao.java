@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.chaucer.o2o.entity.ShopCategory;
 
 public interface ShopCategoryDao {
-	List<ShopCategory> queryShopCategory(
+	List<ShopCategory> queryShopCategoryList(
 			@Param("shopCategoryCondition") ShopCategory shopCategoryCondition);
 
 }
