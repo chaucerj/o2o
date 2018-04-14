@@ -80,4 +80,6 @@ public class ProductCategoryManagement {
 		}
 		return modelMap;
 	}
+	@RequestMapping(value = "addproductcategorys", method = RequestMethod.POST)
+	@ResponseBody
 }
