@@ -4,16 +4,13 @@ $(function() {
 	var deleteUrl = '/o2o/shopadmin/removeproductcategory';
 	getList();
 	function getList() {
-		$
-				.getJSON(
-						listUrl,
-						function(data) {
+		$.getJSON(
+				listUrl,function(data) {
 							if (data.success) {
 								var dataList = data.data;
 								$('.category-wrap').html('');
 								var tempHtml = '';
-								dataList
-										.map(function(item, index) {
+								dataList.map(function(item, index) {
 											tempHtml += ''
 													+ '<div class="row row-product-category now">'
 													+ '<div class="col-33 product-category-name">'
@@ -31,9 +28,7 @@ $(function() {
 							}
 						});
 	}
-	$('#new')
-			.click(
-					function() {
+	$('#new').click(function(){
 						var tempHtml = '<div class="row row-product-category temp">'
 								+ '<div class="col-33"><input class="category-input category" type="text" placeholder="分类名"></div>'
 								+ '<div class="col-33"><input class="category-input priority" type="number" placeholder="优先级"></div>'
@@ -41,7 +36,7 @@ $(function() {
 								+ '</div>';
 						$('.category-wrap').append(tempHtml);
 					});
-	$('#submit').click(function() {
+	$('#submit').click(function(){
 		var tempArr = $('.temp');
 		var productCategoryList = [];
 		tempArr.map(function(index, item) {

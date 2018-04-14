@@ -3,6 +3,7 @@ package com.chaucer.o2o.dto;
 import java.util.List;
 
 import com.chaucer.o2o.entity.ProductCategory;
+import com.chaucer.o2o.enums.ProductCategoryStatusEnum;
 
 public class ProductCategoryExecution {
 	private int status;
@@ -12,6 +13,19 @@ public class ProductCategoryExecution {
 	private List<ProductCategory> productCategoryList;
 
 	public ProductCategoryExecution() {
+	}
+
+	// 上架失败的使用的构造器
+	public ProductCategoryExecution(ProductCategoryStatusEnum statusEnum) {
+		this.status = statusEnum.getStatus();
+		this.statusInfo = statusEnum.getStatusInfo();
+	}
+
+	public ProductCategoryExecution(ProductCategoryStatusEnum statusEnum,
+			List<ProductCategory> productCategoryList) {
+		this.status = statusEnum.getStatus();
+		this.statusInfo = statusEnum.getStatusInfo();
+		this.productCategoryList = productCategoryList;
 	}
 
 	public int getStatus() {
