@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.chaucer.o2o.BaseTest;
+import com.chaucer.o2o.dto.ImageHolder;
 import com.chaucer.o2o.dto.ShopExecution;
 import com.chaucer.o2o.entity.Area;
 import com.chaucer.o2o.entity.Shop;
@@ -25,8 +26,9 @@ import com.chaucer.o2o.service.ShopService;
 public class ShopServiceTest extends BaseTest {
 	@Autowired
 	private ShopService shopService;
+
 	@Test
-	public void testGetShopList()throws ShopOperationException{
+	public void testGetShopList() throws ShopOperationException {
 		Shop shopCondition = new Shop();
 		ShopCategory shopCategory = new ShopCategory();
 		shopCategory.setCategoryId(3L);
@@ -35,20 +37,25 @@ public class ShopServiceTest extends BaseTest {
 		System.out.println(se.getShopList().size());
 		System.out.println(se.getAmount());
 	}
+
 	@Test
 	@Ignore
-	public void testModifyShop() throws ShopOperationException,FileNotFoundException{
+	public void testModifyShop()
+			throws ShopOperationException, FileNotFoundException {
 		Shop shop = new Shop();
 		shop.setShopId(1L);
 		shop.setShopName("修改后的名称");
 		File shopImg = new File("E:/project/image/itachi.jpg");
 		InputStream ips = new FileInputStream(shopImg);
-		ShopExecution se = shopService.modifyShop(shop, ips, shopImg.getName());
+		ImageHolder thumbnail = new ImageHolder(shopImg.getName(), ips);
+		ShopExecution se = shopService.modifyShop(shop, thumbnail);
 		System.out.println(shop.getShopImg());
 	}
+
 	@Test
 	@Ignore
-	public void testAddShop() throws ShopOperationException, FileNotFoundException {
+	public void testAddShop()
+			throws ShopOperationException, FileNotFoundException {
 		Shop shop = new Shop();
 		ShopCategory sc = new ShopCategory();
 		UserInfo owner = new UserInfo();
@@ -68,7 +75,8 @@ public class ShopServiceTest extends BaseTest {
 		shop.setShopDescription("test");
 		File shopImg = new File("E:/project/image/test.jpg");
 		InputStream ips = new FileInputStream(shopImg);
-		ShopExecution se = shopService.addShop(shop, ips, shopImg.getName());
+		ImageHolder thumbnail = new ImageHolder(shopImg.getName(), ips);
+		ShopExecution se = shopService.addShop(shop, thumbnail);
 		assertEquals(ShopStatusEnum.CHECK.getStatus(), se.getStatus());
 
 	}

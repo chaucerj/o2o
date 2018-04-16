@@ -80,6 +80,36 @@ public class ProductCategoryManagement {
 		}
 		return modelMap;
 	}
-	@RequestMapping(value = "addproductcategorys", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/delproductcategory", method = RequestMethod.POST)
 	@ResponseBody
+	private Map<String, Object> delProductCategory(Long productCategoryId,
+			HttpServletRequest request) {
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		if (productCategoryId != null && productCategoryId > 0) {
+			try {
+				Shop currentShop = (Shop) request.getSession()
+						.getAttribute("currentShop");
+				ProductCategoryExecution pe = productCategoryService
+						.delProductCategory(productCategoryId,
+								currentShop.getShopId());
+				if (pe.getStatus() == ProductCategoryStatusEnum.SUCCESS
+						.getStatus()) {
+					modelMap.put("success", true);
+				} else {
+					modelMap.put("success", false);
+					modelMap.put("errMsg", pe.getStatusInfo());
+				}
+			} catch (ProductCategoryOperationException e) {
+				modelMap.put("success", false);
+				modelMap.put("errMsg", e.toString());
+				return modelMap;
+			}
+
+		} else {
+			modelMap.put("success", false);
+			modelMap.put("errMsg", "请至少选择一个商品类别");
+		}
+		return modelMap;
+	}
 }

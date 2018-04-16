@@ -17,5 +17,12 @@ public interface ProductCategoryDao {
 	 */
 	int batchInsertProductCategory(List<ProductCategory> productCategoryList);
 
-	int deleteProductCategory(@Param("produCategoryId") long productCategoryId);
+	/**
+	 * 删除商品，2个以上参数Mybatis无法识别
+	 * 
+	 * @param productCategoryId
+	 * @return
+	 */
+	int deleteProductCategory(@Param("produCategoryId") long productCategoryId,
+			@Param("shopId") long shopId);
 }

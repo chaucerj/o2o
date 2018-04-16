@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chaucer.o2o.dao.ProductCategoryDao;
 import com.chaucer.o2o.dto.ProductCategoryExecution;
@@ -45,6 +46,28 @@ public class ProductCategoryImpl implements ProductCategoryService {
 		} else {
 			return new ProductCategoryExecution(
 					ProductCategoryStatusEnum.EMPTY_LIST);
+		}
+	}
+
+	/**
+	 * 优先清空该类品id的商品关联id为空
+	 */
+	@Override
+	@Transactional
+	public ProductCategoryExecution delProductCategory(long productCategoryId,
+			long shopId) throws ProductCategoryOperationException {
+		try {
+			int effectNum = productCategoryDao
+					.deleteProductCategory(productCategoryId, shopId);
+			if (effectNum <= 0) {
+				throw new ProductCategoryOperationException("删除分类失败");
+			} else {
+				return new ProductCategoryExecution(
+						ProductCategoryStatusEnum.SUCCESS);
+			}
+		} catch (Exception e) {
+			throw new ProductCategoryOperationException(
+					"delete productCategory error" + e.getMessage());
 		}
 	}
 

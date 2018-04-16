@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.chaucer.o2o.dto.ImageHolder;
 import com.chaucer.o2o.dto.ShopExecution;
 import com.chaucer.o2o.entity.Area;
 import com.chaucer.o2o.entity.Shop;
@@ -144,8 +145,10 @@ public class ShopManagementController {
 			// }
 			ShopExecution se;
 			try {
-				se = shopService.addShop(shop, shopImg.getInputStream(),
-						shopImg.getOriginalFilename());
+				ImageHolder thumbnail = new ImageHolder(
+						shopImg.getOriginalFilename(),
+						shopImg.getInputStream());
+				se = shopService.addShop(shop, thumbnail);
 				if (se.getStatus() == ShopStatusEnum.CHECK.getStatus()) {
 					modelmap.put("success", true);
 					@SuppressWarnings("unchecked")
@@ -261,12 +264,14 @@ public class ShopManagementController {
 		// 2.修改店铺信息
 		if (shop != null && shop.getShopId() != null) {
 			ShopExecution se;
+			ImageHolder thumbnail = null;
 			try {
 				if (shopImg == null) {
-					se = shopService.modifyShop(shop, null, null);
+					se = shopService.modifyShop(shop, null);
 				} else {
-					se = shopService.modifyShop(shop, shopImg.getInputStream(),
-							shopImg.getOriginalFilename());
+					thumbnail = new ImageHolder(shopImg.getOriginalFilename(),
+							shopImg.getInputStream());
+					se = shopService.modifyShop(shop, thumbnail);
 				}
 				if (se.getStatus() == ShopStatusEnum.SUCCESS.getStatus()) {
 					modelmap.put("success", true);
