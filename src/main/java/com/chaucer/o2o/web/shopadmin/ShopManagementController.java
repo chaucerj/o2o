@@ -21,10 +21,12 @@ import com.chaucer.o2o.dto.ImageHolder;
 import com.chaucer.o2o.dto.ShopExecution;
 import com.chaucer.o2o.entity.Area;
 import com.chaucer.o2o.entity.Shop;
+import com.chaucer.o2o.entity.ShopCategory;
 import com.chaucer.o2o.entity.UserInfo;
 import com.chaucer.o2o.enums.ShopStatusEnum;
 import com.chaucer.o2o.exceptions.ShopOperationException;
 import com.chaucer.o2o.service.AreaService;
+import com.chaucer.o2o.service.ShopCategoryService;
 import com.chaucer.o2o.service.ShopService;
 import com.chaucer.o2o.util.CodeUtil;
 import com.chaucer.o2o.util.HttpServletRequestUtil;
@@ -37,6 +39,8 @@ public class ShopManagementController {
 	private ShopService shopService;
 	@Autowired
 	private AreaService areaService;
+	@Autowired
+	private ShopCategoryService shopCategoryService;
 
 	@RequestMapping(value = "/getshoplist", method = RequestMethod.GET)
 	@ResponseBody
@@ -87,7 +91,26 @@ public class ShopManagementController {
 		return modelMap;
 	}
 
-	@SuppressWarnings("unused")
+	@RequestMapping(value = "/getshopinitinfo", method = RequestMethod.GET)
+	@ResponseBody
+	private Map<String, Object> getShopInitInfo() {
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		List<ShopCategory> shopCategoryList = new ArrayList<ShopCategory>();
+		List<Area> areaList = new ArrayList<Area>();
+		try {
+			shopCategoryList = shopCategoryService
+					.getShopCategoryList(new ShopCategory());
+			areaList = areaService.getAreaList();
+			modelMap.put("shopCategoryList", shopCategoryList);
+			modelMap.put("areaList", areaList);
+			modelMap.put("success", true);
+		} catch (Exception e) {
+			modelMap.put("success", false);
+			modelMap.put("errMsg", e.getMessage());
+		}
+		return modelMap;
+	}
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> registerShop(HttpServletRequest request) {
@@ -103,7 +126,7 @@ public class ShopManagementController {
 		ObjectMapper mapper = new ObjectMapper();
 		Shop shop = null;
 		try {
-			mapper.readValue(shopStr, Shop.class);
+			shop = mapper.readValue(shopStr, Shop.class);
 		} catch (Exception e) {
 			modelmap.put("success", false);
 			modelmap.put("errMsg", e.getMessage());
@@ -231,7 +254,6 @@ public class ShopManagementController {
 
 	}
 
-	@SuppressWarnings("unused")
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> modifyShop(HttpServletRequest request) {
@@ -247,7 +269,7 @@ public class ShopManagementController {
 		ObjectMapper mapper = new ObjectMapper();
 		Shop shop = null;
 		try {
-			mapper.readValue(shopStr, Shop.class);
+			shop = mapper.readValue(shopStr, Shop.class);
 		} catch (Exception e) {
 			modelmap.put("success", false);
 			modelmap.put("errMsg", e.getMessage());

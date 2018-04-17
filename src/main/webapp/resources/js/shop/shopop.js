@@ -4,10 +4,10 @@
 $(function() {
 	var shopId = getQueryString("shopId");
 	var isEdit = shopId ? true : false;
-	var initUrl = "o2o/shopadmin/getshopinitInfo";
-	var registerShopUrl = "o2o/shopadmin/register";
+	var initUrl = "/o2o/shopadmin/getshopinitinfo";
+	var registerShopUrl = "/o2o/shopadmin/register";
 	var shopInfoUrl = "/o2o/shopadmin/getshopbyid?shopId=" + shopId;
-	var editShopUrl = "o2o/shopadmin/modifyshop";
+	var editShopUrl = "/o2o/shopadmin/modifyshop";
 	if (!isEdit) {
 		getShopInitInfo();
 	} else {
@@ -67,25 +67,25 @@ $(function() {
 			shop.shopId=shopId;
 		}
 		shop.shopName = $("#shop-name").val();
-		shop.shopPhone = $("#shop-phone").val();
-		shop.shopAddr = $("#shop-addr").val();
-		shop.shopDesc = $("#shop-desc").val();
+		shop.shopContact= $("#shop-phone").val();
+		shop.shopAddress = $("#shop-addr").val();
+		shop.shopDescription = $("#shop-desc").val();
 		shop.shopCategory = {
 			shopCategoryId : $("#shop-category").find("option").not(function() {
 				return !this.selected;
 			}).data("id")
 		};
-		shop.Area = {
-			shopCategoryId : $("#area").find("option").not(function() {
+		shop.area = {
+			areaId : $("#area").find("option").not(function() {
 				return !this.selected;
 			}).data("id")
 		};
-		var shopImg = ("#shop-img")[0].files[0];
+		var shopImg = $("#shop-img")[0].files[0];
 
 		var formData = new FormData();
 		formData.append('shopImg', shopImg);
-		formData.append('shopStr', JSON.Stringify(shop));
-		var verifyCodeActural = ('#j_kaptcha').val();
+		formData.append('shopStr', JSON.stringify(shop));
+		var verifyCodeActural = $('#j_kaptcha').val();
 		if (!verifyCodeActural) {
 			$.toast("请输入验证码");
 			return

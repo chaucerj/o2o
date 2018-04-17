@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.chaucer.o2o.dao.ProductDao;
 import com.chaucer.o2o.dao.ProductImgDao;
@@ -18,6 +19,7 @@ import com.chaucer.o2o.service.ProductService;
 import com.chaucer.o2o.util.ImageUtil;
 import com.chaucer.o2o.util.PathUtil;
 
+@Service
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao productDao;

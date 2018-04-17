@@ -31,7 +31,7 @@ public class ShopServiceTest extends BaseTest {
 	public void testGetShopList() throws ShopOperationException {
 		Shop shopCondition = new Shop();
 		ShopCategory shopCategory = new ShopCategory();
-		shopCategory.setCategoryId(3L);
+		shopCategory.setShopCategoryId(3L);
 		shopCondition.setShopCategory(shopCategory);
 		ShopExecution se = shopService.getShopList(shopCondition, 1, 2);
 		System.out.println(se.getShopList().size());
@@ -62,7 +62,7 @@ public class ShopServiceTest extends BaseTest {
 		Area area = new Area();
 		owner.setUserId(1L);
 		area.setAreaId(2L);
-		sc.setCategoryId(1L);
+		sc.setShopCategoryId(1L);
 		shop.setArea(area);
 		shop.setOwner(owner);
 		shop.setShopCategory(sc);

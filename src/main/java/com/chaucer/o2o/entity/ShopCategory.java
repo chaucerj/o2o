@@ -3,59 +3,75 @@ package com.chaucer.o2o.entity;
 import java.util.Date;
 
 public class ShopCategory {
-	private Long categoryId;
-	private String categoryName;
-	private String description;
-	private String categoryImg;
+	private Long shopCategoryId;
+	private String shopCategoryName;
+	private String shopDescription;
+	private String shopCategoryImg;
 	private Integer priority;
 	private Date createTime;
 	private Date lastEditTime;
 	private ShopCategory parent;
-	public Long getCategoryId() {
-		return categoryId;
+
+	public Long getShopCategoryId() {
+		return shopCategoryId;
 	}
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+
+	public void setShopCategoryId(Long shopCategoryId) {
+		this.shopCategoryId = shopCategoryId;
 	}
-	public String getCategoryName() {
-		return categoryName;
+
+	public String getShopCategoryName() {
+		return shopCategoryName;
 	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+
+	public void setShopCategoryName(String shopCategoryName) {
+		this.shopCategoryName = shopCategoryName;
 	}
-	public String getDescription() {
-		return description;
+
+	public String getShopDescription() {
+		return shopDescription;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public void setShopDescription(String shopDescription) {
+		this.shopDescription = shopDescription;
 	}
-	public String getCategoryImg() {
-		return categoryImg;
+
+	public String getShopCategoryImg() {
+		return shopCategoryImg;
 	}
-	public void setCategoryImg(String categoryImg) {
-		this.categoryImg = categoryImg;
+
+	public void setShopCategoryImg(String shopCategoryImg) {
+		this.shopCategoryImg = shopCategoryImg;
 	}
+
 	public Integer getPriority() {
 		return priority;
 	}
+
 	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
+
 	public Date getCreateTime() {
 		return createTime;
 	}
+
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+
 	public Date getLastEditTime() {
 		return lastEditTime;
 	}
+
 	public void setLastEditTime(Date lastEditTime) {
 		this.lastEditTime = lastEditTime;
 	}
+
 	public ShopCategory getParent() {
 		return parent;
 	}
+
 	public void setParent(ShopCategory parent) {
 		this.parent = parent;
 	}
