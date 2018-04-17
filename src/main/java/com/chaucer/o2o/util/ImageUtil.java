@@ -25,6 +25,7 @@ import net.coobird.thumbnailator.geometry.Positions;
  */
 public class ImageUtil {
 	private static Logger logger = LoggerFactory.getLogger(ImageUtil.class);
+	// 当前项目编译路径
 	private static String basePath = Thread.currentThread()
 			.getContextClassLoader().getResource("").getPath();
 	private static final SimpleDateFormat sdf = new SimpleDateFormat(
@@ -54,21 +55,22 @@ public class ImageUtil {
 		String realFileName = getRandomFileName();
 		String extension = getFileExtension(thumbnail.getImgName());
 		makeDir(targetAddr);
-		String realativeAddr = targetAddr + realFileName + extension;
-		logger.debug("current img path is" + realativeAddr);
-		File newImg = new File(PathUtil.getImgBasePath() + realativeAddr);
+		String relativeAddr = targetAddr + realFileName + extension;
+		logger.debug("current img path is" + relativeAddr);
+		File newImg = new File(PathUtil.getImgBasePath() + relativeAddr);
 		logger.debug("current complete img path is" + PathUtil.getImgBasePath()
-				+ realativeAddr);
+				+ relativeAddr);
 		try {
 			Thumbnails.of(thumbnail.getImage()).size(200, 200)
 					.watermark(Positions.BOTTOM_RIGHT,
-							ImageIO.read(new File(basePath + "watermark.jpg")),
+							ImageIO.read(new File(basePath + "/watermark.jpg")),
 							0.25f)
 					.outputQuality(0.8f).toFile(newImg);
 		} catch (IOException e) {
 			logger.error(e.toString());
+			throw new RuntimeException("创建缩略图失败：" + e.toString());
 		}
-		return realativeAddr;
+		return relativeAddr;
 	}
 
 	/**

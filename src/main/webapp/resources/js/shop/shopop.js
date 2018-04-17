@@ -7,7 +7,7 @@ $(function() {
 	var initUrl = "/o2o/shopadmin/getshopinitinfo";
 	var registerShopUrl = "/o2o/shopadmin/register";
 	var shopInfoUrl = "/o2o/shopadmin/getshopbyid?shopId=" + shopId;
-	var editShopUrl = "/o2o/shopadmin/modifyshop";
+	var editShopUrl = "/o2o/shopadmin/modify";
 	if (!isEdit) {
 		getShopInitInfo();
 	} else {
@@ -19,9 +19,9 @@ $(function() {
 				// 若访问成功，则依据后台传递过来的店铺信息为表单元素赋值
 				var shop = data.shop;
 				$('#shop-name').val(shop.shopName);
-				$('#shop-addr').val(shop.shopAddr);
-				$('#shop-phone').val(shop.phone);
-				$('#shop-desc').val(shop.shopDesc);
+				$('#shop-addr').val(shop.shopAddress);
+				$('#shop-phone').val(shop.shopContact);
+				$('#shop-desc').val(shop.shopDescription);
 				// 给店铺类别选定原先的店铺类别值
 				var shopCategory = '<option data-id="'
 					+ shop.shopCategory.shopCategoryId + '" selected>'

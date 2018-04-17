@@ -55,7 +55,7 @@
 		<where>
 			<if
 				test="shopCondition.shopCategory!=null and shopCondition.ShopCategory.shopCategoryId!=null">
-				and s.category_id =#{shopCondition.shopCategory.shopCategoryId}
+				and s.shop_category_id =#{shopCondition.shopCategory.shopCategoryId}
 			</if>
 			<if
 				test="shopCondition.area != null and 
@@ -143,7 +143,7 @@
 	<insert id="insertShop" useGeneratedKeys="true" keyColumn="shop_id"
 		keyProperty="shopId">
 		INSERT INTO
-		tb_shop(owner_id, area_id, category_id,
+		tb_shop(owner_id, area_id, shop_category_id,
 		shop_name, shop_description, shop_address,
 		shop_contact, shop_img,
 		priority,
@@ -167,7 +167,7 @@
 			<if test="enableStatus != null">enable_status=#{enableStatus},</if>
 			<if test="advice != null">advice=#{advice},</if>
 			<if test="area != null">area_id=#{area.areaId},</if>
-			<if test="shopCategory != null">category_id=#{shopCategory.shopCategoryId}</if>
+			<if test="shopCategory != null">shop_category_id=#{shopCategory.shopCategoryId}</if>
 		</set>
 		where shop_id=#{shopId}
 	</update>
