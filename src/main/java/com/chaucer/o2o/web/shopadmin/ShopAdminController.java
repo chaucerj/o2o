@@ -14,16 +14,26 @@ public class ShopAdminController {
 
 	@RequestMapping(value = "/shoplist")
 	public String shoplsit() {
+		// 转发至店铺列表
 		return "shop/shoplist";
 	}
 
 	@RequestMapping(value = "/shopmanagement")
 	public String shopManagement() {
+		// 转发至店铺管理页面
 		return "shop/shopmanagement";
 	}
 
 	@RequestMapping(value = "/productcategorymanagement")
 	public String produCtcategoryManagement() {
+		// 转发至商品类别管理页面
 		return "shop/productcategorymanagement";
 	}
+
+	@RequestMapping(value = "/productoperation")
+	public String productOperation() {
+		// 转发至商品类别管理页面
+		return "shop/productoperation";
+	}
+
 }

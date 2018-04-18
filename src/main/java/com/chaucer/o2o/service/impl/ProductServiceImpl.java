@@ -108,4 +108,12 @@ public class ProductServiceImpl implements ProductService {
 		product.setImgAddr(thumbnailAddr);
 	}
 
+	@Override
+	public ProductExecution modifyProduct(Product product,
+			ImageHolder thumbnail, List<ImageHolder> productImgHolderList)
+					throws ProductOperationException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
