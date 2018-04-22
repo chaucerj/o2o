@@ -285,32 +285,31 @@ public class ProductManagementController {
 		}
 		return modelMap;
 	}
-	//
-	// /**
-	// * 封装商品查询条件到Product实例中
-	// *
-	// * @param shopId(mandatory)
-	// * @param productCategoryId(optional)
-	// * @param productName(optional)
-	// * @return
-	// */
-	// private Product compactProductCondition(long shopId, long
-	// productCategoryId,
-	// String productName) {
-	// Product productCondition = new Product();
-	// Shop shop = new Shop();
-	// shop.setShopId(shopId);
-	// productCondition.setShop(shop);
-	// // 若有指定类别的要求则添加进去
-	// if (productCategoryId != -1L) {
-	// ProductCategory productCategory = new ProductCategory();
-	// productCategory.setProductCategoryId(productCategoryId);
-	// productCondition.setProductCategory(productCategory);
-	// }
-	// // 若有商品名模糊查询的要求则添加进去
-	// if (productName != null) {
-	// productCondition.setProductName(productName);
-	// }
-	// return productCondition;
-	// }
+
+	/**
+	 * 封装商品查询条件到Product实例中
+	 *
+	 * @param shopId(mandatory)
+	 * @param productCategoryId(optional)
+	 * @param productName(optional)
+	 * @return
+	 */
+	private Product compactProductCondition(long shopId, long productCategoryId,
+			String productName) {
+		Product productCondition = new Product();
+		Shop shop = new Shop();
+		shop.setShopId(shopId);
+		productCondition.setShop(shop);
+		// 若有指定类别的要求则添加进去
+		if (productCategoryId != -1L) {
+			ProductCategory productCategory = new ProductCategory();
+			productCategory.setProductCategoryId(productCategoryId);
+			productCondition.setProductCategory(productCategory);
+		}
+		// 若有商品名模糊查询的要求则添加进去
+		if (productName != null) {
+			productCondition.setProductName(productName);
+		}
+		return productCondition;
+	}
 }

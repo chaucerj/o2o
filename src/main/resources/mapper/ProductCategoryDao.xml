@@ -7,7 +7,7 @@
 		parameterType="Long">
 		SELECT
 		product_category_id,
-		category_name,
+		product_category_name,
 		priority,
 		create_time,
 		shop_id
@@ -21,7 +21,7 @@
 	<insert id="batchInsertProductCategory" parameterType="java.util.List">
 		INSERT
 		INTO
-		tb_product_category(category_name,priority,create_time,shop_id)
+		tb_product_category(product_category_name,priority,create_time,shop_id)
 		VALUES
 		<foreach collection="list" item="productCategory" index="index"
 			separator=",">

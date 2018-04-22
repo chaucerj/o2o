@@ -1,5 +1,9 @@
 package com.chaucer.o2o.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.chaucer.o2o.entity.Product;
 
 public interface ProductDao {
@@ -11,5 +15,11 @@ public interface ProductDao {
 
 	// 更新产品信息
 	int updateProduct(Product product);
+
+	List<Product> queryProductList(@Param("productCondition")Product productCondition, @Param("rowIndex")int rowIndex, @Param("pageSize")int pageSize);
+
+	int queryProductCount(@Param("productCondition")Product productCondition);
+
+	int deleteProduct(@Param("productId")Long productId, @Param("shopId")long shopId);
 
 }

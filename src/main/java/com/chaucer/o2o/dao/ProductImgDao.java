@@ -11,5 +11,8 @@ import com.chaucer.o2o.entity.ProductImg;
  *
  */
 public interface ProductImgDao {
+	//批量插入产品图片
 	int batchInsertProductImg(List<ProductImg> productImgList);
+	//通过产品编号批量删除产品图片（编辑操作时）
+	int deleteProductImgByProductId(Long productId);
 }

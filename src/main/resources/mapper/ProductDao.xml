@@ -105,7 +105,7 @@
 		SELECT
 		p.product_id,
 		p.product_name,
-		p.product_desc,
+		p.product_description,
 		p.img_addr,
 		p.normal_price,
 		p.promotion_price,
@@ -117,7 +117,7 @@
 		p.shop_id,
 		pm.product_img_id,
 		pm.img_addr AS detail_img,
-		pm.img_desc,
+		pm.img_description,
 		pm.priority,
 		pm.create_time
 		FROM
@@ -151,7 +151,7 @@
 		UPDATE tb_product
 		<set>
 			<if test="productName != null">product_name=#{productName},</if>
-			<if test="productDesc != null">product_description=#{productDescription},</if>
+			<if test="productDescription != null">product_description=#{productDescription},</if>
 			<if test="imgAddr != null">img_addr=#{imgAddr},</if>
 			<if test="normalPrice != null">normal_price=#{normalPrice},</if>
 			<if test="promotionPrice != null">promotion_price=#{promotionPrice},</if>
