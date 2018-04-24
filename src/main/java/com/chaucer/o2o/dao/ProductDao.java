@@ -21,5 +21,7 @@ public interface ProductDao {
 	int queryProductCount(@Param("productCondition")Product productCondition);
 
 	int deleteProduct(@Param("productId")Long productId, @Param("shopId")long shopId);
+	//表关联，删除商品信息前先清空产品分类Id
+	int updateProductCategory2Null(Long productCategoryId);
 
 }

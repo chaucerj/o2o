@@ -85,12 +85,12 @@ $(function() {
 		var formData = new FormData();
 		formData.append('shopImg', shopImg);
 		formData.append('shopStr', JSON.stringify(shop));
-		var verifyCodeActual = $('#j_kaptcha').val();
-		if (!verifyCodeActual) {
+		var verifyCodeActural = $('#j_kaptcha').val();
+		if (!verifyCodeActural) {
 			$.toast("请输入验证码");
 			return
 		}
-		formData.append("verifyCodeActual", verifyCodeActual);
+		formData.append("verifyCodeActural", verifyCodeActural);
 		$.ajax({
 			url : (isEdit?editShopUrl:registerShopUrl),
 			type : 'POST',

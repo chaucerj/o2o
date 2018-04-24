@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chaucer.o2o.dao.ProductCategoryDao;
+import com.chaucer.o2o.dao.ProductDao;
 import com.chaucer.o2o.dto.ProductCategoryExecution;
 import com.chaucer.o2o.entity.ProductCategory;
 import com.chaucer.o2o.enums.ProductCategoryStatusEnum;
@@ -17,6 +18,8 @@ import com.chaucer.o2o.service.ProductCategoryService;
 public class ProductCategoryImpl implements ProductCategoryService {
 	@Autowired
 	private ProductCategoryDao productCategoryDao;
+	@Autowired
+	private ProductDao productDao;
 
 	@Override
 	public List<ProductCategory> getProductCategoryList(long shopId) {
@@ -56,6 +59,16 @@ public class ProductCategoryImpl implements ProductCategoryService {
 	@Transactional
 	public ProductCategoryExecution delProductCategory(long productCategoryId,
 			long shopId) throws ProductCategoryOperationException {
+		try{
+			//解除tb_product中product_categoryId的关联
+			int effectNum = productDao.updateProductCategory2Null(productCategoryId);
+			if(effectNum<0){
+				throw new ProductCategoryOperationException("更新分类失败");
+			}
+		}catch(Exception e){
+			throw new ProductCategoryOperationException("删除商品分类操作失败"+e.toString());
+		}
+		
 		try {
 			int effectNum = productCategoryDao
 					.deleteProductCategory(productCategoryId, shopId);

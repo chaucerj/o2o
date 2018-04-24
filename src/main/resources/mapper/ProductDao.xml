@@ -167,7 +167,7 @@
 		WHERE product_id = #{productId}
 		AND shop_id=#{shop.shopId}
 	</update>
-	<update id="updateProductCategoryToNull" parameterType="Long">
+	<update id="updateProductCategory2Null" parameterType="Long">
 		UPDATE
 		tb_product
 		SET
