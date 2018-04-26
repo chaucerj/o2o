@@ -19,8 +19,21 @@ import com.chaucer.o2o.entity.UserInfo;
 public class ShopDaoTest extends BaseTest {
 	@Autowired
 	private ShopDao shopDao;
-
 	@Test
+	public void testQueryShopListAndCount() {
+		Shop shopCondition = new Shop();
+		ShopCategory childCategory = new ShopCategory();
+		ShopCategory parentCategory = new ShopCategory();
+		parentCategory.setShopCategoryId(12L);
+		childCategory.setParent(parentCategory);
+		shopCondition.setShopCategory(childCategory);
+		List<Shop> shopList = shopDao.queryShopList(shopCondition, 0, 6);
+		int count = shopDao.queryShopCount(shopCondition);
+		System.out.println("店铺列表的大小：" + shopList.size());
+		System.out.println("店铺总数：" + count);		
+	}
+	@Test
+	@Ignore
 	public void testQueryShopList() {
 		Shop shopCondition = new Shop();
 		UserInfo owner = new UserInfo();
@@ -54,7 +67,7 @@ public class ShopDaoTest extends BaseTest {
 		UserInfo owner = new UserInfo();
 		Area area = new Area();
 		owner.setUserId(1L);
-		area.setAreaId(2L);
+		area.setAreaId(2);
 		sc.setShopCategoryId(1L);
 		shop.setArea(area);
 		shop.setOwner(owner);

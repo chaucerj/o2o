@@ -39,7 +39,7 @@ public class AreaDaoTest extends BaseTest {
 	public void updateArea() throws ParseException {
 		Area area = new Area();
 		area.setAreaName("西苑");
-		area.setAreaId(3L);
+		area.setAreaId(3);
 		Date date = new Date();
 		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		// String d = sdf.format(date);
