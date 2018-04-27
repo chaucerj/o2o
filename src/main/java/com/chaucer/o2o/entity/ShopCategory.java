@@ -5,7 +5,7 @@ import java.util.Date;
 public class ShopCategory {
 	private Long shopCategoryId;
 	private String shopCategoryName;
-	private String shopDescription;
+	private String shopCategoryDesc;
 	private String shopCategoryImg;
 	private Integer priority;
 	private Date createTime;
@@ -28,12 +28,12 @@ public class ShopCategory {
 		this.shopCategoryName = shopCategoryName;
 	}
 
-	public String getShopDescription() {
-		return shopDescription;
+	public String getShopCategoryDesc() {
+		return shopCategoryDesc;
 	}
 
-	public void setShopDescription(String shopDescription) {
-		this.shopDescription = shopDescription;
+	public void setShopCategoryDesc(String shopCategoryDesc) {
+		this.shopCategoryDesc = shopCategoryDesc;
 	}
 
 	public String getShopCategoryImg() {

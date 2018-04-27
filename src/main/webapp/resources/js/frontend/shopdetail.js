@@ -36,7 +36,7 @@ $(function() {
 										new Date(shop.lastEditTime)
 												.Format("yyyy-MM-dd"));
 								$('#shop-name').html(shop.shopName);
-								$('#shop-desc').html(shop.shopDesc);
+								$('#shop-desc').html(shop.shopDescription);
 								$('#shop-addr').html(shop.shopAddr);
 								$('#shop-phone').html(shop.phone);
 								// 获取后台返回的该店铺的商品类别列表
@@ -87,7 +87,7 @@ $(function() {
 							+ '<div class="item-media">' + '<img src="'
 							+ item.imgAddr + '" width="44">' + '</div>'
 							+ '<div class="item-inner">'
-							+ '<div class="item-subtitle">' + item.productDesc
+							+ '<div class="item-subtitle">' + item.productDescription
 							+ '</div>' + '</div>' + '</li>' + '</ul>'
 							+ '</div>' + '</div>' + '<div class="card-footer">'
 							+ '<p class="color-gray">'
