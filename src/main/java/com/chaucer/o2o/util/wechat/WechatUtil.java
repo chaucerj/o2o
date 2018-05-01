@@ -43,10 +43,10 @@ public class WechatUtil {
 	public static UserAccessToken getUserAccessToken(String code)
 			throws IOException {
 		// 测试号信息里的appId
-		String appId = "wxd7f6c5b8899fba83";
+		String appId = "wx97a92d31de946765";
 		log.debug("appId:" + appId);
 		// 测试号信息里的appsecret
-		String appsecret = "665ae80dba31fc91ab6191e7da4d676d";
+		String appsecret = "d4624c36b6795d1d99dcf0547af5443d";
 		log.debug("secret:" + appsecret);
 		// 根据传入的code,拼接出访问微信定义好的接口的URL
 		String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="
