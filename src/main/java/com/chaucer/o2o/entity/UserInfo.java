@@ -11,7 +11,7 @@ public class UserInfo {
 	private String email;
 	private Integer enableStatus;
 	private Date createTime;
-	private Date lasteditTime;
+	private Date lastEditTime;
 
 	public Long getUserId() {
 		return userId;
@@ -77,12 +77,12 @@ public class UserInfo {
 		this.createTime = createTime;
 	}
 
-	public Date getLasteditTime() {
-		return lasteditTime;
+	public Date getLastEditTime() {
+		return lastEditTime;
 	}
 
-	public void setLasteditTime(Date lasteditTime) {
-		this.lasteditTime = lasteditTime;
+	public void setLastEditTime(Date lastEditTime) {
+		this.lastEditTime = lastEditTime;
 	}
 
 }
