@@ -89,13 +89,13 @@ public class WechatLoginController {
 			} else {
 				userInfo.setUserType(2);
 			}
-			auth.setUser(userInfo);
+			auth.setUserInfo(userInfo);
 			WechatAuthExecution we = wechatAuthService.register(auth);
 			if (we.getState() != WechatAuthStateEnum.SUCCESS.getState()) {
 				return null;
 			} else {
 				userInfo = userInfoService
-						.getUserInfoById(auth.getUser().getUserId());
+						.getUserInfoById(auth.getUserInfo().getUserId());
 				request.getSession().setAttribute("user", userInfo);
 			}
 		}
