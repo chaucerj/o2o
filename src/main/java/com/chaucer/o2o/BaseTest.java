@@ -6,12 +6,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * 配置spring,junit整合 ，junit启动加载springIOC容器
+ * 
  * @author c_zhengsiyi-001
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-//告诉junit,spring配置文件路径
-@ContextConfiguration({"classpath:spring/spring-dao.xml","classpath:spring/spring-service.xml"})
+// 告诉junit,spring配置文件路径
+@ContextConfiguration({ "classpath:spring/spring-dao.xml",
+		"classpath:spring/spring-service.xml",
+		"classpath:spring/spring-redis.xml" })
 public class BaseTest {
 
 }
