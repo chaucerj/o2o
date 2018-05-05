@@ -5,7 +5,8 @@ import java.util.List;
 import com.chaucer.o2o.entity.Area;
 
 public interface AreaService {
-      List<Area> getAreaList();
-      
-      
+	public final static String AREALISTKEY = "arealist";
+
+	List<Area> getAreaList();
+
 }

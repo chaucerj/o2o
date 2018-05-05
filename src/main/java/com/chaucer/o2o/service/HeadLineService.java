@@ -6,5 +6,8 @@ import java.util.List;
 import com.chaucer.o2o.entity.HeadLine;
 
 public interface HeadLineService {
-	List<HeadLine> getHeadLineList(HeadLine headLineCondition) throws IOException;
+	public final static String HLLISTKEY = "headlinelist";
+
+	List<HeadLine> getHeadLineList(HeadLine headLineCondition)
+			throws IOException;
 }

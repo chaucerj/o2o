@@ -7,7 +7,7 @@
 		<id column="wechat_auth_id" property="wechatAuthId" />
 		<result column="open_id" property="openId" />
 		<result column="create_time" property="createTime" />
-		<association property="personInfo" column="user_id"
+		<association property="userInfo" column="user_id"
 			javaType="com.chaucer.o2o.entity.UserInfo">
 			<id column="user_id" property="userId" />
 			<result column="name" property="name" />
